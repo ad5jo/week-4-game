@@ -77,22 +77,50 @@
 
 //<!-- ---------------------------------- MAIN LOOP begin --------------------------------------- -->
 	document.onkeyup = function(event) {
-    if (a_game_data.b_game_over === true)
-	    {
-			//
-	    }
 
-	    else if (a_game_data.b_game_over === false)
-	    {
-	    	// 
-			}
-	    }
+		console.log(event.key);
+
+		s_key = event.key;
+
+		if (s_key === "1")
+		{
+			test1();
+		}
+		else
+		{
+			test2();
+		}
+
+
+   //  if (a_game_data.b_game_over === true)
+	  //   {
+			// //
+	  //   }
+
+	  //   else if (a_game_data.b_game_over === false)
+	  //   {
+	  //   	// 
+	  //   }
     } // end of document.onkeyup
 
 //<!-- ---------------------------------- MAIN LOOP end --------------------------------------- -->
 
 //<!-- --------------------------------- Begin Funtions --------------------------------------- -->
+	function test1()
+	{
+		$("#parag" ).css( "background-color",  "yellow" );
+		$("#parag" ).css( "maxWidth",  "123px" );
+		$("#press_any_key_to_start" ).css( "background-color",  "green" );
+		$("#press_any_key_to_start" ).css( "maxWidth",  "200px" );
+	}
 
+	function test2()
+	{
+		$("#parag" ).css( "background-color",  "white" );
+		$("#parag" ).css( "maxWidth",  "321px" ); // <div id="press_any_key_to_start">Press a letter key to start</div>
+		$("#press_any_key_to_start" ).css( "background-color",  "blue" ); // <p id = "parag">Test 123</p>
+		$("#press_any_key_to_start" ).css( "maxWidth",  "50px" );
+	}
 
 
 	function playAudio() {
@@ -160,7 +188,8 @@ function myFunction_show_lost() {
 // test this function
 //var i_numb = count_str_in_string("toastasa","a");
 //console.log("BOOM! i_numb: " + i_numb.toString());
-
+$("#parag" ).css( "maxWidth",  "123px" );
+$("#parag" ).css( "background-color",  "yellow" );
 
 </script>
 
@@ -178,6 +207,10 @@ function myFunction_show_lost() {
 
 			 <div class="col-md-4">
 				<div id="press_any_key_to_start">Press a letter key to start</div>
+
+				<p id = "parag">Test 123</p>
+				<!-- background-color: yellow; -->
+
 			</div>
 
 			  <div class="col-md-4"></div>
