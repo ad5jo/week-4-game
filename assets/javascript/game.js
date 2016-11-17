@@ -1,32 +1,49 @@
 // Dave Durkee
 // 11.14.2016
 
-var a_game_data ={
-    	s_state = "choose_hero";
+
+
+$(document).ready(function(){
+
+    $("#attack_button").click(function(){
+        $("#results").html("attack_button clicked with mouse");
+        console.log("attack_button clicked with mouse");
+    });
+
+    $("#play_again_button").click(function(){
+        $("#results").html("play_again_button clicked with mouse");
+        console.log("play_again_button clicked with mouse");
+    });
+
+});
+
     	// "choose_hero", "choose_enemy", "battle", "won", "lost"
 
-    	o_hero = {name : "npc_1", base_attack : 20, hp : 0, attack_value : 0, image : "assets/images/npc_1.jpg"},
-    	o_enemy = {name : "npc_2", base_attack : 20, hp : 0, attack_value : 0, image : "assets/images/npc_2.jpg"},
+
+var a_game_data = {
+    	s_state : "choose_hero",
+
+    	o_hero : {name : "npc_1", base_attack : 20, hp : 0, attack_value : 0, image : "./assets/images/han.png"}, // 
+    	o_enemy : {name : "npc_2", base_attack : 20, hp : 0, attack_value : 0, image : "./assets/images/maul.png"}, // 
+
     	// ///////////////////////////////////////////////////////////////////////////////////////////////
-    	a_npc_list:[
-    		o_npc = {name : "npc_1", base_attack : 20, hp : 0, attack_value : 0, image : "assets/images/npc_1.jpg"}, 
-    		o_npc = {name : "npc_2", base_attack : 20, hp : 0, attack_value : 0, image : "assets/images/npc_2.jpg"}, 
-    		o_npc = {name : "npc_3", base_attack : 20, hp : 0, attack_value : 0, image : "assets/images/npc_3.jpg"}, 
-    		o_npc = {name : "npc_4", base_attack : 20, hp : 0, attack_value : 0, image : "assets/images/npc_4.jpg"}, 
+    	a_npc_list : [
+    		o_npc = {name : "npc_1", base_attack : 20, hp : 0, attack_value : 0, image : "./assets/images/han.png"}, 
+    		o_npc = {name : "npc_2", base_attack : 20, hp : 0, attack_value : 0, image : "./assets/images/chewy.png"}, 
+    		o_npc = {name : "npc_3", base_attack : 20, hp : 0, attack_value : 0, image : "./assets/images/maul.png"}, 
+    		o_npc = {name : "npc_4", base_attack : 20, hp : 0, attack_value : 0, image : "./assets/images/darth.png"}, 
     	],
 
     	// ///////////////////////////////////////////////////////////////////////////////////////////////
-
         m_reset_for_new_game: function() {
           this.s_state = "choose_hero";
-
         },
 
         m_generate_new_npc_stats: function() {
           for (var i = 1; i > 4; i++)
           {
           	
-          	i_seed_hp = Math.floor((Math.random() * 5) + 5;
+          	i_seed_hp = Math.floor((Math.random() * 5) + 5);
           	i_hp = Math.floor((Math.random() * 100) + (i_seed_hp * 5));
           	this.a_npc_list[i].o_npc[hp] = i_hp;
 
@@ -75,7 +92,7 @@ var a_game_data ={
 			    {
 			    	a_game_data.s_state = func_debug();
 			    }
-
+			}
 
 ,	// END of m_play: function
 		b_dummy: true,
