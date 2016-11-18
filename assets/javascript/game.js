@@ -1,19 +1,130 @@
 // Dave Durkee
 // 11.14.2016
 
+var o_attacker_img;
+var o_defender_img;
 
 
 $(document).ready(function(){
 
+    $("#npc1").click(function(){
+        $("#results").html("You have selected your hero. Now select an enemy.");
+        var s_img =  "./assets/images/han.png";
+        if (a_game_data.s_state === "choose_hero")
+        {
+          $("#rest").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#select_a_hero").html(" ");
+          $("#img_han").remove();
+
+          s_img =  "./assets/images/chewy.png";
+          $("#en1").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_chewy").remove();
+
+          s_img =  "./assets/images/maul.png";
+          $("#en2").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_maul").remove();
+
+          s_img =  "./assets/images/darth.png";
+          $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_darth").remove();
+        } 
+    });
+
+
+    $("#npc2").click(function(){
+        $("#results").html("You have selected your hero. Now select an enemy.");
+        var s_img =  "./assets/images/chewy.png";
+        if (a_game_data.s_state === "choose_hero")
+        {
+          $("#rest").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#select_a_hero").html(" ");
+          $("#img_chewy").remove();
+
+          s_img =  "./assets/images/han.png";
+          $("#en1").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_han").remove();
+
+          s_img =  "./assets/images/maul.png";
+          $("#en2").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_maul").remove();
+
+          s_img =  "./assets/images/darth.png";
+          $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_darth").remove();
+        }    
+    });
+
+
+    $("#npc3").click(function(){
+        $("#results").html("You have selected your hero. Now select an enemy.");
+        var s_img =  "./assets/images/maul.png";
+        if (a_game_data.s_state === "choose_hero")
+        {
+          $("#rest").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_maul").remove();
+          $("#select_a_hero").html(" ");
+          s_img =  "./assets/images/han.png";
+          $("#en1").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_han").remove();
+
+          s_img =  "./assets/images/chewy.png";
+          $("#en2").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_chewy").remove();
+
+          s_img =  "./assets/images/darth.png";
+          $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_darth").remove();
+
+        }    
+    });
+
+
+    $("#npc4").click(function(){
+        $("#results").html("You have selected your hero. Now select an enemy.");
+        var s_img =  "./assets/images/darth.png";
+        if (a_game_data.s_state === "choose_hero")
+        {
+          $("#rest").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_darth").remove();
+          $("#select_a_hero").html(" ");
+          s_img =  "./assets/images/han.png";
+          $("#en1").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_han").remove();
+
+          s_img =  "./assets/images/chewy.png";
+          $("#en2").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_chewy").remove();
+
+          s_img =  "./assets/images/maul.png";
+          $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          $("#img_maul").remove();
+
+        }    
+    });
+
+
+
     $("#attack_button").click(function(){
         $("#results").html("attack_button clicked with mouse");
         console.log("attack_button clicked with mouse");
+        $("#the_image_of_attacker").remove();
+        $("#the_image_of_attacker").html("");
+        $("#the_image_of_attacker").html('<img id="hans" src="./assets/images/han.png" />');
+       
+        a_game_data.m_play("a"); // Attack
     });
 
     $("#play_again_button").click(function(){
         $("#results").html("play_again_button clicked with mouse");
         console.log("play_again_button clicked with mouse");
+
+        $("#the_image_of_defender").html("");
+        //$("#the_image_of_defender").html("<img src=" + images[count] + " width='400px'>");
+        $("#the_image_of_defender").html('<img id="hans" src="./assets/images/darth.png" />');
+        a_game_data.m_play("r"); // restart / play again
     });
+
+    // a_game_data
 
 });
 
@@ -37,6 +148,7 @@ var a_game_data = {
     	// ///////////////////////////////////////////////////////////////////////////////////////////////
         m_reset_for_new_game: function() {
           this.s_state = "choose_hero";
+          $("#the_image_of_attacker").remove();
         },
 
         m_generate_new_npc_stats: function() {
@@ -63,20 +175,26 @@ var a_game_data = {
 
 
 		m_play: function(s_key) {
-		// "choose_hero", "choose_enemy", "battle","won", "lost"
+      console.log("entered m_play");
+		  // "choose_hero", "choose_enemy", "battle","won", "lost"
+		  $("#results").html("Game state is " + a_game_data.s_state);
+		  console.log("Game state is " + a_game_data.s_state);
+
 		    if (a_game_data.s_state === "choose_hero")
 			    {
+			    	$("#results").html("Choose a hero");
 			    	a_game_data.s_state = func_choose_hero(s_key);
 			    }
 
 		    else if (a_game_data.s_state === "choose_enemy")
 			    {
+			    	$("#results").html("Choose an enemy");
 			    	a_game_data.s_state = func_choose_enemy();
 			    }
 
 		    else if (a_game_data.s_state === "battle")
 			    {
-			    	a_game_data.s_state = func_battle();
+			    	a_game_data.s_state = func_battle(s_key); // 'a' for attack
 			    }
 
 		    else if (a_game_data.s_state === "won")
@@ -92,8 +210,9 @@ var a_game_data = {
 			    {
 			    	a_game_data.s_state = func_debug();
 			    }
+        console.log("leaving m_play");
 			}
-
+    
 ,	// END of m_play: function
 		b_dummy: true,
     } // end of a_game_data
@@ -103,7 +222,41 @@ var a_game_data = {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function func_choose_hero()
+{
+  console.log("entered func_choose_hero")
+  return "choose_enemy";
+}
 
+function func_choose_enemy()
+{
+  console.log("entered func_choose_enemy")
+  return "battle";
+}
+
+function func_battle()
+{
+  console.log("entered func_battle")
+  return "won";
+}
+
+function func_won()
+{
+  console.log("entered func_won")
+  return "choose_hero";
+}
+
+function func_lost()
+{
+  console.log("entered func_lost")
+  return "choose_hero";
+}
+
+function func_debug()
+{
+  console.log("entered func_debug")
+  return "choose_hero";
+}
 
 //<!-- ---------------------------------- Event LOOPs begin --------------------------------------- -->
 	document.onkeyup = function(event) {
