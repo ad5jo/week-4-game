@@ -6,27 +6,36 @@ var o_defender_img;
 
 
 $(document).ready(function(){
+//mod_test();
+//sort_media();
 
     $("#npc1").click(function(){
-        $("#results").html("You have selected your hero. Now select an enemy.");
+        //$("#results").html("You have selected your hero. Now select an enemy. " + a_game_data.s_state);
         var s_img =  "./assets/images/han.png";
         if (a_game_data.s_state === "choose_hero")
         {
           $("#rest").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
           $("#select_a_hero").html(" ");
           $("#img_han").remove();
+          $("#npc1").html("");
+
 
           s_img =  "./assets/images/chewy.png";
           $("#en1").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
           $("#img_chewy").remove();
+          $("#npc1").html("");
 
           s_img =  "./assets/images/maul.png";
           $("#en2").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
           $("#img_maul").remove();
+          $("#npc1").html("");
 
           s_img =  "./assets/images/darth.png";
           $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
           $("#img_darth").remove();
+          $("#npc1").html("");
+          a_game_data.s_state = "choose_enemy";
+          $("#results").html("You have selected your hero. Now select an enemy. " + a_game_data.s_state);
         } 
     });
 
@@ -51,6 +60,8 @@ $(document).ready(function(){
           s_img =  "./assets/images/darth.png";
           $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
           $("#img_darth").remove();
+          a_game_data.s_state = "choose_enemy";
+          $("#results").html("You have selected your hero. Now select an enemy. " + a_game_data.s_state);
         }    
     });
 
@@ -61,7 +72,7 @@ $(document).ready(function(){
         if (a_game_data.s_state === "choose_hero")
         {
           $("#rest").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
-          $("#img_maul").remove();
+          $("#img_maul").html("");
           $("#select_a_hero").html(" ");
           s_img =  "./assets/images/han.png";
           $("#en1").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
@@ -74,7 +85,8 @@ $(document).ready(function(){
           s_img =  "./assets/images/darth.png";
           $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
           $("#img_darth").remove();
-
+          a_game_data.s_state = "choose_enemy";
+          $("#results").html("You have selected your hero. Now select an enemy. " + a_game_data.s_state);
         }    
     });
 
@@ -98,18 +110,100 @@ $(document).ready(function(){
           s_img =  "./assets/images/maul.png";
           $("#en3").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
           $("#img_maul").remove();
-
+          a_game_data.s_state = "choose_enemy";
+          $("#results").html("You have selected your hero. Now select an enemy. " + a_game_data.s_state);
         }    
     });
 
+        $("#en1").click(function()
+        {
+          if (a_game_data.s_state === "choose_enemy")
+          {
+            // move the defender
+            var obj = $("#en1").html();
+            $("#defender").html(obj);
+            $("#en1").html("");
+
+            // move en2
+            obj = $("#en2").html();
+            $("#en1").html(obj);
+            $("#en2").html("");
+
+            // move en3
+            obj = $("#en3").html();
+            $("#en2").html(obj);
+            $("#en3").html("");
+
+            // move the hero
+            obj = $("#rest").html();
+            $("#attacker").html(obj);
+            $("#rest").html("");
+
+            a_game_data.s_state = "battle";
+            $("#results").html("You have selected your opponent. Let the battle begin." + a_game_data.s_state);
+          }
+        });
+
+
+        $("#en2").click(function()
+        {
+          if (a_game_data.s_state === "choose_enemy")
+          {
+
+            // move the defender
+            var obj = $("#en2").html();
+            $("#defender").html(obj);
+            $("#en2").html("");
+
+            // move the en3
+            var obj = $("#en3").html();
+            $("#en2").html(obj);
+            $("#en3").html("");
+
+            // move the hero
+            obj = $("#rest").html();
+            $("#attacker").html(obj);
+            $("#rest").html("");
+
+
+            a_game_data.s_state = "battle"
+            $("#results").html("You have selected your opponent. Let the battle begin." + a_game_data.s_state);
+          }
+        });
+
+        $("#en3").click(function()
+        {
+          if (a_game_data.s_state === "choose_enemy")
+          {
+
+            // move the defender
+            var obj = $("#en3").html();
+            $("#defender").html(obj);
+            $("#en3").remove();
+
+            // move the hero
+            obj = $("#rest").html();
+            $("#attacker").html(obj);
+            $("#rest").remove();
+
+
+            a_game_data.s_state = "battle"
+            $("#results").html("You have selected your opponent. Let the battle begin." + a_game_data.s_state);
+          }
+        });
 
 
     $("#attack_button").click(function(){
-        $("#results").html("attack_button clicked with mouse");
-        console.log("attack_button clicked with mouse");
-        $("#the_image_of_attacker").remove();
-        $("#the_image_of_attacker").html("");
-        $("#the_image_of_attacker").html('<img id="hans" src="./assets/images/han.png" />');
+      if (a_game_data.s_state === "battle")
+      {
+        $("#results").html("Boom. " + a_game_data.s_state);
+      }
+
+        //$("#results").html("attack_button clicked with mouse");
+        //console.log("attack_button clicked with mouse");
+        //$("#the_image_of_attacker").remove();
+        //$("#the_image_of_attacker").html("");
+        //$("#the_image_of_attacker").html('<img id="hans" src="./assets/images/han.png" />');
        
         a_game_data.m_play("a"); // Attack
     });
@@ -148,7 +242,28 @@ var a_game_data = {
     	// ///////////////////////////////////////////////////////////////////////////////////////////////
         m_reset_for_new_game: function() {
           this.s_state = "choose_hero";
-          $("#the_image_of_attacker").remove();
+          $("#the_image_of_attacker").html("");
+          $("#the_image_of_defender").html("");
+          $("#rest").html("");
+
+          s_img =  a_game_data[a_npc_list][0][image]; //"./assets/images/maul.png";
+          $("#img_han").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          
+          s_img =  a_game_data[a_npc_list][2][image]; //"./assets/images/maul.png";
+          $("#img_chewy").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          
+          s_img =  a_game_data[a_npc_list][3][image]; //"./assets/images/maul.png";
+          $("#img_maul").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          
+          s_img =  a_game_data[a_npc_list][4][image]; //"./assets/images/maul.png";
+          $("#img_darth").html("<img src=" + s_img + " width = '75px' "  + " height = '75px' " + ">");
+          
+
+          $("#en1").html("");
+          $("#en2").html("");
+          $("#en3").html("");
+
+
         },
 
         m_generate_new_npc_stats: function() {
@@ -287,3 +402,94 @@ function func_debug()
 	  //   		myFunction_show_playing();
 	  //   		a_game_data.m_play(event.key);
 			// }
+
+      function mod_test()
+      {
+        for (var i = 0; i < 100; i++)
+        {
+          var result3 = i % 3;
+          var result5 = i % 5;
+
+
+          if (result  === 0)
+          {
+            console.log ("Fizz");
+          }
+
+          else if (result  === 0)
+          {
+             console.log ("Fizz");
+           }
+
+           else if (i % 3  && i % 5)
+           {
+             console.log ("Fizz");
+           }
+          else
+          {
+          console.log(i);
+          }
+        }
+      }
+
+      function prime_test(num)
+      {
+
+      }
+
+
+      function sort_media (){
+        var files = ["pavans_first_birthday.mov",
+          "owens_asleep_at_the_computer.jpg",
+          "michael_fights_a_polar_bear.mp4",
+          "nate_road_rage.avi",
+          "ruby_skydiving.jpeg",
+          "ken_getting_his_black_belt.png",
+          "dan_winning_underground_street_race.mov",
+          "its_hard_to_come_up_with_file_names.gif",
+          "seriously_this_is_taking_too_long.mpg",
+          "i_wonder_how_many_of_these_i_should_have.png",
+          "probably_a_few_more.avi",
+          "nutmeg_is_clawing_my_sneakers_again.mp4",
+          "cat_i_will_destroy_you.gif",
+          "i_wish_we_had_a_dog.jpeg",
+          "stop_looking_at_me_like_that_nutmeg.mpeg",
+          "aww_i_cant_hate_you.png",
+          "omg_my_sneakers.avi",
+          "cat_you_are_the_worst.mp4"
+          ];
+          var image_files = [];
+          var video_files = [];
+          var other_files = [];
+
+          var i_length = files.length;
+
+          for (var i = 0; i < i_length; i++)
+          {
+            //
+            var s_name = files[i];
+            var i_index_of_dot = s_name.indexOf(".");
+            var s_ext = s_name.substring(i_index_of_dot);
+
+            if (s_ext === ".jpg" || s_ext === ".gif" || s_ext === ".jpeg"  ||s_ext === ".png" ){
+                image_files.push(s_name);
+
+            }
+            else if ( s_ext === ".mov" || s_ext === ".avi" || s_ext === ".mpeg"  ||s_ext === ".mp4" ||s_ext === ".mpg" ){
+                video_files.push(s_name);
+            }
+          else {
+                other_files.push(s_name);
+            }
+
+
+          }
+            console.log( "image_files: " + image_files)
+            console.log( " " )
+
+            console.log( "video_files: " + video_files)
+                        console.log( " " )
+
+            console.log( "other_files: " + other_files)
+            
+      }
